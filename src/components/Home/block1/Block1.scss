@@ -1,0 +1,42 @@
+.block1_main {
+    background-image: url("https://www.soyuz.ru/public/uploads/files/2/7624106/202305251429313fb4ba5fb5.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: end;
+    position: relative;
+}
+.block1 {
+    padding-bottom: 50px;
+    color: white;
+    z-index: 2;
+    > button {
+        padding: 8px 24px;
+        border-radius: 5px;
+        font-weight: 600;
+        margin-top: 50px;
+    }
+}
+.background_filter_block {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 620px) {
+    .block1_main {
+        background-image: url(https://ru-images-s.kinorium.com/movie/1080/2005077.jpg?1684410495);
+    }
+    .block1 {
+        padding-bottom: 20px;
+        > button {
+            padding: 6px 18px;
+            margin-top: 20px;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+.header_search_input {
+    padding-left: 10px;
+    color: white;
+    background-color: rgb(156, 163, 175, 0.5);
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.555);
+    }
+}
+
+.ugolok_text {
+    font-size: 28px;
+}
+
+.search_block {
+    display: flex;
+    position: relative;
+    > img {
+        background-color: rgb(78, 82, 88);
+        border-radius: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        cursor: pointer;
+        width: 44px;
+        height: 24px;
+        right: 12px;
+        top: 5px;
+        position: absolute;
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    }
+}
+
+.search_block_adap {
+    display: flex;
+    position: relative;
+    > img {
+        background-color: rgb(78, 82, 88);
+        border-radius: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        cursor: pointer;
+        width: 44px;
+        height: 34px;
+        right: 24px;
+        top: 3px;
+        position: absolute;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
