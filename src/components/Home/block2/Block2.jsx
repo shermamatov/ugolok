@@ -26,7 +26,7 @@ const Block2 = () => {
     // Initialization for ES Users
     async function getPaginate() {
         let data = await getDocs(filmRef);
-        setCount(data.docs.length / limitPage);
+        setCount(Math.ceil(data.docs.length / limitPage));
     }
 
     function paggChange(e, p) {

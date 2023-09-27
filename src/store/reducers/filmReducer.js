@@ -223,7 +223,7 @@ export function getWish() {
 export function searchData(input) {
     return async (dispatch) => {
         let data = await getDocs(filmRef);
-        if (input) {
+        if (input && input !== "all") {
             let search = data.docs
                 .map((doc) => ({ ...doc.data(), id: doc.id }))
                 .filter((item) => {

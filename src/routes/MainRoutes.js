@@ -5,6 +5,7 @@ import AdminPage from "../pages/AdminPage";
 import EditPage from "../pages/EditPage";
 import WatchFilmPage from "../pages/WatchFilmPage";
 import WishPage from "../pages/WishPage";
+import SearchPage from "../pages/SearchPage";
 
 const MainRoutes = () => {
     const userRoutes = [
@@ -13,6 +14,7 @@ const MainRoutes = () => {
         { link: "/edit/:id", element: <EditPage />, id: 3 },
         { link: "/watch/:id", element: <WatchFilmPage />, id: 4 },
         { link: "/wish", element: <WishPage />, id: 5 },
+        { link: "/search/:id", element: <SearchPage />, id: 6 },
     ];
     const PRIVATE_ROUTES = [];
     return (
