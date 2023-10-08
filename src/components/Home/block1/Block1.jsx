@@ -1,24 +1,41 @@
 import React from "react";
+
+import Slider from "./Slider";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
 import "./Block1.scss";
+
+// import required modules
+import { Pagination, Autoplay } from "swiper/modules";
+import { sliderdb } from "../../../consts";
 const Block1 = () => {
     return (
-        <div className="block1_main">
-            <div className="content block1">
-                <h1 className="text-3xl md:text-4xl font-bold">
-                    Человек-паук: Паутина вселенных
-                </h1>
-                <p className="text-sm md:text-xl md:w-[80%]  mt-4">
-                    После воссоединения с Гвен Стейси дружелюбный сосед
-                    Человек-Паук попадает из Бруклина в Мультивселенную, где
-                    встречает команду Паучков, защищающих само её существование.
-                    Пытаясь справиться с новой угрозой, Майлз сталкивается с
-                    Пауками из других вселенных. Настаёт момент, когда ему
-                    необходимо решить, что значит быть героем, спасающим тех,
-                    кого любишь больше всего
-                </p>
-                <button className="bg-amber-500">смотреть</button>
-            </div>
-            <div className="background_filter_block"></div>
+        <div>
+            <Swiper
+                slidesPerView={1}
+                spaceBetween={5}
+                loop={true}
+                pagination={{
+                    clickable: true,
+                    dynamicBullets: true,
+                }}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                modules={[Pagination, Autoplay]}
+                className="mySwiper"
+            >
+                {sliderdb.map((item) => (
+                    <SwiperSlide key={item.id}>
+                        <Slider item={item} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </div>
     );
 };

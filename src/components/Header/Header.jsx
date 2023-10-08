@@ -7,7 +7,6 @@ import logo from "../../assets/logoIcon.svg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import searchIcon from "../../assets/searchIcon.svg";
-import { useEffect } from "react";
 import { searchData } from "../../store/reducers/filmReducer";
 
 const Header = () => {
@@ -22,7 +21,7 @@ const Header = () => {
                 <div>
                     <p
                         onClick={() => navigate("/")}
-                        className="text-white font-mono ugolok_text flex opacity-80"
+                        className="text-white font-mono ugolok_text flex opacity-80 cursor-pointer"
                     >
                         <img className="w-10" src={logo} alt="" />
                         ugolok
@@ -34,6 +33,12 @@ const Header = () => {
                             onChange={(e) =>
                                 setSearchInputValue(e.target.value)
                             }
+                            onKeyDown={() => {
+                                dispatch(searchData(searchInputValue));
+                                navigate(
+                                    `/search/${searchInputValue || "all"}`
+                                );
+                            }}
                             value={searchInputValue}
                             // onChange={(e) => dispatch(searchData(e.target.value))}
                             className="rounded-lg w-[300px] mr-3 header_search_input h-9"

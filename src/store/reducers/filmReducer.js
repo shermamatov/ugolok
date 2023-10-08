@@ -106,7 +106,7 @@ export const editFilm = (id, film) => {
 
 export const filterData = (filter, type) => {
     return async (dispatch) => {
-        if (type == "All") {
+        if (type === "All") {
             const data = await getDocs(filmRef);
             dispatch({
                 type: reduxConsts.GET_FILMS,
@@ -119,15 +119,17 @@ export const filterData = (filter, type) => {
             const q = query(filmRef, where(filter, "==", type));
             let filterArr = [];
             const querySnapshot = await getDocs(q);
+
             querySnapshot.forEach((doc) => {
-                filterArr.push(doc.data());
+                filterArr.push({ ...doc.data(), id: doc.id });
             });
             dispatch({
                 type: reduxConsts.GET_FILMS,
-                payload: filterArr.map((doc) => ({
-                    ...doc,
-                    id: doc.id,
-                })),
+                payload: filterArr,
+                // filterArr.map((doc) => ({
+                //     ...doc,
+                //     id: doc.id,
+                // })),
             });
         }
     };
@@ -148,49 +150,47 @@ export const filterDataGenre = (filter, type) => {
             const q = query(filmRef, where(filter, "array-contains", type));
             let filterArr = [];
             const querySnapshot = await getDocs(q);
+
             querySnapshot.forEach((doc) => {
-                filterArr.push(doc.data());
+                filterArr.push({ ...doc.data(), id: doc.id });
             });
             dispatch({
                 type: reduxConsts.GET_FILMS,
-                payload: filterArr.map((doc) => ({
-                    ...doc,
-                    id: doc.id,
-                })),
+                payload: filterArr,
             });
         }
     };
 };
 
-export const dataSort = (sorting) => {
-    return async (dispatch) => {
-        console.log(sorting);
-        if (sorting === "All" || sorting === "all") {
-            const data = await getDocs(filmRef);
-            dispatch({
-                type: reduxConsts.GET_FILMS,
-                payload: data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                })),
-            });
-        } else {
-            const q = query(filmRef, orderBy("year", sorting));
-            let sort = [];
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                sort.push(doc.data());
-            });
-            dispatch({
-                type: reduxConsts.GET_FILMS,
-                payload: sort.map((doc) => ({
-                    ...doc,
-                    id: doc.id,
-                })),
-            });
-        }
-    };
-};
+// export const dataSort = (sorting) => {
+//     return async (dispatch) => {
+//         console.log(sorting);
+//         if (sorting === "All" || sorting === "all") {
+//             const data = await getDocs(filmRef);
+//             dispatch({
+//                 type: reduxConsts.GET_FILMS,
+//                 payload: data.docs.map((doc) => ({
+//                     ...doc.data(),
+//                     id: doc.id,
+//                 })),
+//             });
+//         } else {
+//             const q = query(filmRef, orderBy("year", sorting));
+//             let sort = [];
+//             const querySnapshot = await getDocs(q);
+//             querySnapshot.forEach((doc) => {
+//                 sort.push(doc.data());
+//             });
+//             dispatch({
+//                 type: reduxConsts.GET_FILMS,
+//                 payload: sort.map((doc) => ({
+//                     ...doc,
+//                     id: doc.id,
+//                 })),
+//             });
+//         }
+//     };
+// };
 
 // ! async functions end
 

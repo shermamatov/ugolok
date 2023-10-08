@@ -3,7 +3,7 @@ import "./block2.scss";
 import FilmCard from "./FilmCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    dataSort,
+    // dataSort,
     filterData,
     filterDataGenre,
     getFilms,
@@ -17,7 +17,7 @@ import {
     Stack,
 } from "@mui/material";
 import { getDocs } from "firebase/firestore";
-import { filmRef, limitPage } from "../../../consts";
+import { filmRef, limitPage, reduxConsts } from "../../../consts";
 const Block2 = () => {
     const dispatch = useDispatch();
     const films = useSelector((state) => state.film.films);
@@ -36,6 +36,21 @@ const Block2 = () => {
     useEffect(() => {
         getPaginate();
     }, []);
+
+    function dataSort(sorting) {
+        if (sorting) {
+            let newArr = [...films];
+            if (sorting === "asc") {
+                newArr.sort((a, b) => a.year - b.year);
+            } else if (sorting === "desc") {
+                newArr.sort((a, b) => b.year - a.year);
+            }
+            dispatch({
+                type: reduxConsts.GET_FILMS,
+                payload: newArr,
+            });
+        }
+    }
 
     useEffect(() => {
         dispatch(getFilms(page));
@@ -101,7 +116,7 @@ const Block2 = () => {
                             // value={age}
                             defaultValue={"All"}
                             label="Age"
-                            onChange={(e) => dispatch(dataSort(e.target.value))}
+                            onChange={(e) => dataSort(e.target.value)}
                         >
                             <MenuItem value="All">свой порядок</MenuItem>
                             <MenuItem value="desc">новые</MenuItem>
