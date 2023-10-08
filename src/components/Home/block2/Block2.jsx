@@ -16,17 +16,28 @@ import {
     Select,
     Stack,
 } from "@mui/material";
-import { getDocs } from "firebase/firestore";
+import { getDocs, limit } from "firebase/firestore";
 import { filmRef, limitPage, reduxConsts } from "../../../consts";
 const Block2 = () => {
     const dispatch = useDispatch();
     const films = useSelector((state) => state.film.films);
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(1);
-    // Initialization for ES Users
+    const [filmsState, setFilmsState] = useState([]);
+
     async function getPaginate() {
-        let data = await getDocs(filmRef);
-        setCount(Math.ceil(data.docs.length / limitPage));
+        let filmsArrForSetCount = [...films];
+        setCount(Math.ceil(filmsArrForSetCount.length / limitPage));
+        // let data = await getDocs(filmRef);
+        // setCount(Math.ceil(data.docs.length / limitPage));
+    }
+
+    function sliceDataForPaginate() {
+        let filmsArr = [...films];
+        let start = (page - 1) * limitPage;
+        let end = start + limitPage - 1;
+        let slicedArr = filmsArr.slice(start, end);
+        return slicedArr;
     }
 
     function paggChange(e, p) {
@@ -34,8 +45,14 @@ const Block2 = () => {
     }
 
     useEffect(() => {
-        getPaginate();
+        dispatch(getFilms());
     }, []);
+
+    useEffect(() => {
+        console.log("films state changed");
+        getPaginate();
+        // sliceDataForPaginate();
+    }, [films]);
 
     function dataSort(sorting) {
         if (sorting) {
@@ -52,9 +69,9 @@ const Block2 = () => {
         }
     }
 
-    useEffect(() => {
-        dispatch(getFilms(page));
-    }, [page]);
+    // useEffect(() => {
+    //     dispatch(getFilms(page));
+    // }, [page]);
 
     return (
         <div>
@@ -125,7 +142,7 @@ const Block2 = () => {
                     </FormControl>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-10 mt-6 sm:mt-10">
-                    {films.map((item) => (
+                    {sliceDataForPaginate().map((item) => (
                         <FilmCard key={item.id} item={item} />
                     ))}
                 </div>

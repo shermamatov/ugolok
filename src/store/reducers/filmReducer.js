@@ -45,10 +45,11 @@ export const filmReducer = (state = stater, action) => {
 export const getFilms = (page = 1) => {
     return async (dispatch) => {
         try {
-            let allData = await getDocs(filmRef);
-            let gfd = allData.docs[(page - 1) * limitPage];
-            let q = query(filmRef, limit(limitPage), startAt(gfd));
-            let data = await getDocs(q);
+            let data = await getDocs(filmRef);
+            // let allData = await getDocs(filmRef);
+            // let gfd = allData.docs[(page - 1) * limitPage];
+            // let q = query(filmRef, limit(limitPage), startAt(gfd));
+            // let data = await getDocs(q);
             dispatch({
                 type: reduxConsts.GET_FILMS,
                 payload: data.docs.map((doc) => ({
