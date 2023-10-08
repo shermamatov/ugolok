@@ -5,7 +5,6 @@ import "./Block1.scss";
 
 export default function Slider({ item }) {
     let width = window.innerWidth;
-    console.log(item.name, item.desc.length);
     return (
         <>
             <div
