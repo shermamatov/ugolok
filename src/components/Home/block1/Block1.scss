@@ -1,5 +1,5 @@
 .block1_main {
-    background-image: url("https://www.soyuz.ru/public/uploads/files/2/7624106/202305251429313fb4ba5fb5.jpg");
+    // background-image: url("https://www.soyuz.ru/public/uploads/files/2/7624106/202305251429313fb4ba5fb5.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -30,7 +30,7 @@
 
 @media (max-width: 620px) {
     .block1_main {
-        background-image: url(https://ru-images-s.kinorium.com/movie/1080/2005077.jpg?1684410495);
+        // background-image: url(https://ru-images-s.kinorium.com/movie/1080/2005077.jpg?1684410495);
     }
     .block1 {
         padding-bottom: 20px;
@@ -39,4 +39,27 @@
             margin-top: 20px;
         }
     }
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    // text-align: center;
+    // font-size: 18px;
+    // background: #fff;
+
+    // /* Center slide text vertically */
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
