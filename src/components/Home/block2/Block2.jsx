@@ -32,10 +32,13 @@ const Block2 = () => {
         // setCount(Math.ceil(data.docs.length / limitPage));
     }
 
-    function sliceDataForPaginate() {
+    function sliceDataForPaginate(page) {
         let filmsArr = [...films];
-        let start = (page - 1) * limitPage;
-        let end = start + limitPage - 1;
+        let start = limitPage * (page - 1);
+        let end = start + limitPage;
+        console.log(page);
+        console.log(start);
+        console.log(end);
         let slicedArr = filmsArr.slice(start, end);
         return slicedArr;
     }
@@ -142,7 +145,7 @@ const Block2 = () => {
                     </FormControl>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-10 mt-6 sm:mt-10">
-                    {sliceDataForPaginate().map((item) => (
+                    {sliceDataForPaginate(page).map((item) => (
                         <FilmCard key={item.id} item={item} />
                     ))}
                 </div>
