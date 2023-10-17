@@ -79,4 +79,4 @@ export const reduxConsts = {
 export const filmRef = collection(db, "films");
 export const limitFilmRef = query(collection(db, "films"), limit(2));
 
-export const limitPage = 4;
+export const limitPage = 3;
