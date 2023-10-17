@@ -16,29 +16,23 @@ import {
     Select,
     Stack,
 } from "@mui/material";
-import { getDocs, limit } from "firebase/firestore";
-import { filmRef, limitPage, reduxConsts } from "../../../consts";
+import { limitPage, reduxConsts } from "../../../consts";
+
 const Block2 = () => {
     const dispatch = useDispatch();
     const films = useSelector((state) => state.film.films);
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(1);
-    const [filmsState, setFilmsState] = useState([]);
 
     async function getPaginate() {
         let filmsArrForSetCount = [...films];
         setCount(Math.ceil(filmsArrForSetCount.length / limitPage));
-        // let data = await getDocs(filmRef);
-        // setCount(Math.ceil(data.docs.length / limitPage));
     }
 
     function sliceDataForPaginate(page) {
         let filmsArr = [...films];
         let start = limitPage * (page - 1);
         let end = start + limitPage;
-        console.log(page);
-        console.log(start);
-        console.log(end);
         let slicedArr = filmsArr.slice(start, end);
         return slicedArr;
     }
@@ -52,9 +46,7 @@ const Block2 = () => {
     }, []);
 
     useEffect(() => {
-        console.log("films state changed");
         getPaginate();
-        // sliceDataForPaginate();
     }, [films]);
 
     function dataSort(sorting) {
@@ -72,17 +64,13 @@ const Block2 = () => {
         }
     }
 
-    // useEffect(() => {
-    //     dispatch(getFilms(page));
-    // }, [page]);
-
     return (
         <div>
             <div className="content text-white mt-8">
                 <h2 className="text-3xl sm:text-5xl">Фильмы</h2>
                 <div className="grid gap-4 grid-cols-3 mt-5">
                     <FormControl key={1}>
-                        <InputLabel sx={{}} id="demo-simple-select-label">
+                        <InputLabel id="demo-simple-select-label">
                             тип
                         </InputLabel>
                         <Select
@@ -91,7 +79,7 @@ const Block2 = () => {
                             defaultValue={"All"}
                             label="Age"
                             onChange={(e) =>
-                                dispatch(filterData("type", e.target.value))
+                                dispatch(filterData(e.target.value))
                             }
                         >
                             <MenuItem value="All">все</MenuItem>

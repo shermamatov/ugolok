@@ -3,14 +3,11 @@ import {
     doc,
     getDoc,
     getDocs,
-    limit,
-    orderBy,
     query,
-    startAt,
     updateDoc,
     where,
 } from "firebase/firestore";
-import { filmRef, limitPage, reduxConsts } from "../../consts";
+import { filmRef, reduxConsts } from "../../consts";
 import { db } from "../../fire";
 
 const stater = {
@@ -105,7 +102,7 @@ export const editFilm = (id, film) => {
     };
 };
 
-export const filterData = (filter, type) => {
+export const filterData = (type) => {
     return async (dispatch) => {
         if (type === "All") {
             const data = await getDocs(filmRef);
@@ -117,20 +114,15 @@ export const filterData = (filter, type) => {
                 })),
             });
         } else {
-            const q = query(filmRef, where(filter, "==", type));
+            const q = query(filmRef, where("type", "==", type));
             let filterArr = [];
             const querySnapshot = await getDocs(q);
-
             querySnapshot.forEach((doc) => {
                 filterArr.push({ ...doc.data(), id: doc.id });
             });
             dispatch({
                 type: reduxConsts.GET_FILMS,
                 payload: filterArr,
-                // filterArr.map((doc) => ({
-                //     ...doc,
-                //     id: doc.id,
-                // })),
             });
         }
     };
@@ -155,6 +147,7 @@ export const filterDataGenre = (filter, type) => {
             querySnapshot.forEach((doc) => {
                 filterArr.push({ ...doc.data(), id: doc.id });
             });
+
             dispatch({
                 type: reduxConsts.GET_FILMS,
                 payload: filterArr,

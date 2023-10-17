@@ -9,6 +9,7 @@ const Admin = () => {
     const [kinoJenre, setKinoJenre] = useState();
     const [pleerId, setPleerId] = useState();
     const [inputChecker, setInputChecker] = useState(false);
+
     function filterHandler() {
         let arr = [];
         let checkboxArr = document.getElementsByName("jenre");
